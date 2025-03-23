@@ -1,0 +1,205 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 10%;
+
+    --primary: 240 5% 15%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 5% 15%;
+
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 5% 40%;
+
+    --accent: 220 90% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5% 93%;
+    --input: 240 5% 90%;
+    --ring: 240 5% 80%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5% 26%;
+    --sidebar-primary: 240 6% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 96%;
+    --sidebar-accent-foreground: 240 6% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom element styling */
+  .reveal-text {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .reveal-text::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsl(var(--background));
+    transform: translateX(-100%);
+    animation: text-reveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+  
+  @keyframes text-reveal {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  .glass-card {
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .feature-card {
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), 
+                box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .digit-flip {
+    perspective: 500px;
+  }
+  
+  .digit {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  }
+  
+  .digit.flipped {
+    transform: rotateX(180deg);
+  }
+  
+  /* Colorful backgrounds */
+  .bg-gradient-blue-purple {
+    background: linear-gradient(90deg, hsla(221, 45%, 73%, 1) 0%, hsla(220, 78%, 29%, 1) 100%);
+  }
+  
+  .bg-gradient-orange-pink {
+    background: linear-gradient(90deg, hsla(29, 92%, 70%, 1) 0%, hsla(0, 87%, 73%, 1) 100%);
+  }
+  
+  .bg-gradient-green-teal {
+    background: linear-gradient(90deg, hsla(139, 70%, 75%, 1) 0%, hsla(176, 73%, 88%, 1) 100%);
+  }
+  
+  .bg-gradient-purple {
+    background: linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%);
+  }
+}
+
+@layer components {
+  .button-hover-effect {
+    @apply relative overflow-hidden transition-all duration-300 
+           before:absolute before:inset-0 before:z-0 before:bg-accent/10 
+           before:translate-x-[-100%] before:transition-transform before:duration-300 
+           hover:before:translate-x-0;
+  }
+  
+  .countdown-box {
+    @apply flex flex-col items-center justify-center bg-background/50 rounded-lg 
+           backdrop-blur-md shadow-sm border border-border/30 p-3 w-16 md:w-24;
+  }
+  
+  .service-pill {
+    @apply px-4 py-1.5 text-xs font-medium uppercase tracking-wider rounded-full 
+           text-accent bg-accent/10 inline-block mb-3;
+  }
+  
+  /* Colorful UI components */
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] hover:from-[#2563EB] hover:to-[#7C3AED] 
+           text-white font-medium py-2 px-6 rounded-lg shadow-md transition-all duration-300;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-white to-[#f9fafb] shadow-sm;
+  }
+}
+
+@layer utilities {
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#3B82F6] to-[#0EA5E9];
+  }
+  
+  .text-gradient-purple {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-[#8B5CF6] to-[#D946EF];
+  }
+}
+
+/* Specific animations for countdown */
+@keyframes countdown-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.animate-countdown {
+  animation: countdown-pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
