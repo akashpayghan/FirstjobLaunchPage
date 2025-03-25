@@ -15,7 +15,6 @@ const launchDate = new Date('2025-04-02T11:11:00');
 
 const Index = () => {
   const [mounted, setMounted] = useState(false);
-  
   useEffect(() => {
     setMounted(true);
   }, []);
